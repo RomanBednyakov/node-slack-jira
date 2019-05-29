@@ -1,0 +1,24 @@
+{
+  "name": "express-all-interactions",
+  "private": true,
+  "version": "1.0.0",
+  "description": "An example of using Slack Interactive Messages for Node",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r dotenv/config server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Roman Bednyakov",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/client": "^4.1.0",
+    "@slack/events-api": "^2.2.0",
+    "@slack/interactive-messages": "*",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "jira-connector": "^2.10.0",
+    "node-localstorage": "^1.3.1"
+  }
+}
