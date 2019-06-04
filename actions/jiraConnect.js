@@ -1,9 +1,9 @@
 const JiraClient = require('jira-connector');
 const jira = new JiraClient( {
-  host: process.env.JIRA_HOST || 'bednyakov.atlassian.net',
+  host: process.env.JIRA_HOST,
   basic_auth: {
-    username: process.env.JIRA_EMAIL_USER || 'bednyakov.12@mail.ru',
-    password: process.env.JIRA_TOKEN_USER || 'Vo6gwD48eJaPhckVdvFW13CF'
+    username: process.env.JIRA_EMAIL_USER,
+    password: process.env.JIRA_TOKEN_USER
   },
 });
 
@@ -13,7 +13,7 @@ const jira = new JiraClient( {
 //   "projectTypeKey": "business",
 //   "projectTemplateKey": "com.atlassian.jira-core-project-templates:jira-core-project-management",
 //   "description": "Example Project description",
-//   "lead": "bednyakov.12@mail.ru",
+//   "lead": "beakov.12@mail.ru",
 //   "url": "http://atlassian.com",
 //   "assigneeType": "PROJECT_LEAD",
 //   "avatarId": 10200,
@@ -33,7 +33,7 @@ const jira = new JiraClient( {
 //   projectTypeKey: "software",
 //   key: "RM",
 //   name: "Roman-test",
-//   leadAccountId: "5cebcd9dad83140f22017db0"
+//   leadAccountId: "5d9dad83140f22017db0"
 // }
 // jira.project.createProject(project3, (error, even) => {
 //   console.log('@', even);
