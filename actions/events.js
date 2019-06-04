@@ -1,8 +1,8 @@
 const { selectQuestions } = require('./content');
 const slackEventsApi = require('@slack/events-api');
-const getClientByTeamId = require('./helpers');
+const getClientByTeamId = require('./helpers').slackOauth;
 const jira = require('../actions/jiraConnect');
-
+const attachmentsBase = require('./createAttachments');
 module.exports = function(slackEvents) {
 
   slackEvents.on('message', (message, body) => {
@@ -13,19 +13,31 @@ module.exports = function(slackEvents) {
       }
       if(message.text.indexOf('status') >= 0) {
         const issueKey = message.text.slice(message.text.lastIndexOf('status') + 6).replace(/\s/g, '');
-        jira.issue.getIssue({
-          issueKey: issueKey
-        }, function(error, issue) {
-          if(issue) {
-            slack.chat.postMessage({ channel: message.channel,
-              text: `Status you issue ${'`'}${issue.fields.status.name}${'`'}`})
-              .catch(console.error);
-          } else {
-            slack.chat.postMessage({ channel: message.channel,
-              text: error.errorMessages[0]})
-              .catch(console.error);
-          }
-        });
+        if (issueKey.length > 2) {
+          jira.issue.getIssue({
+            issueKey: issueKey
+          }, function(error, issue) {
+            if(issue) {
+              slack.chat.postMessage({ channel: message.channel,
+                attachments: attachmentsBase.base(
+                  `Status you issue ${'`'}${issue.fields.status.name}${'`'}`,
+                  '#24e336'
+                )
+                })
+                .catch(console.error);
+            } else {
+              slack.chat.postMessage({ channel: message.channel,
+                attachments: attachmentsBase.base(error.errorMessages[0], '#ff000c')
+              })
+                .catch(console.error);
+            }
+          });
+        } else {
+          slack.chat.postMessage({ channel: message.channel,
+            attachments: attachmentsBase.base('Please write key jira issue!', '#ff000c')
+          })
+            .catch(console.error);
+        }
       } else  {
         slack.chat.postMessage({ channel: message.channel,
           attachments: selectQuestions})

@@ -21,13 +21,10 @@ const slackInteractions = createMessageAdapter(slackSigningSecret);
 const app = express();
 app.use('/slack/events', slackEvents.expressMiddleware());
 app.use('/slack/actions', slackInteractions.expressMiddleware());
+// app.use('/oauth', event => console.log('@hubstaff Auth', event));
 app.post('/slack/commands', bodyParser.urlencoded({ extended: false }), slackSlashCommand);
 slackEventsModule(slackEvents);
 slackInteractionsModule(slackInteractions);
-
-app.use('/', event => {
-  // console.log('@event', event);
-});
 
 const port = process.env.PORT || 0;
 http.createServer(app).listen(port, () => {

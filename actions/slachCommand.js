@@ -5,7 +5,6 @@ const axios = require('axios');
 const { interactiveButtons, dialog } = require('./content');
 
 module.exports = function(req, res, next) {
-  console.log('@slackSlashCommand', req.body);
   if (req.body.command === '/interactive-example') {
     const type = req.body.text.split(' ')[0];
     if (type === 'button') {

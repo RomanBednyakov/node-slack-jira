@@ -32,75 +32,37 @@ const selectQuestions = [
     "actions": [
       {
         "name": "theme",
-        "text": "Конференция",
+        "text": "Проект",
         "type": "button",
         "style": 'primary',
-        "value": "Конференция"
+        "value": "Проект"
       },
       {
         "name": "theme",
-        "text": "Железо",
+        "text": "Сотрудник",
         "type": "button",
         "style": 'primary',
-        "value": "Железо"
+        "value": "Сотрудник"
       },
       {
         "name": "theme",
-        "text": "Cофт",
-        "style": 'primary',
+        "text": "Другое",
         "type": "button",
-        "value": "Cофт",
+        "style": 'primary',
+        "value": "Другое"
       },
-      {
-        "name": "theme",
-        "text": "Книги",
-        "style": 'primary',
-        "type": "button",
-        "value": "Cофт",
-      }
     ]
   }
 ];
-const dialogNew = {
+const dialog = {
   callback_id: 'kudos_submit',
   title: 'Jira create task',
   submit_label: 'Give',
   elements: [
     {
-      label: 'Какой отдел ?',
-      type: 'select',
-      name: 'Отдел',
-      options: [
-        {
-          "label": "Рекрутинг",
-          "value": "Рекрутинг"
-        },
-        {
-          "label": "Продажи",
-          "value": "Продажи"
-        },
-        {
-          "label": "Веб разработка",
-          "value": "Веб разработка"
-        },
-        {
-          "label": "Менеджмент",
-          "value": "Менеджмент"
-        },
-        {
-          "label": "Мобильная разработка",
-          "value": "Мобильная разработка"
-        },
-        {
-          "label": "Дизайн",
-          "value": "Дизайн"
-        },
-      ],
-    },
-    {
       label: 'Какой вопрос ?',
       type: 'select',
-      name: 'вопрос',
+      name: 'Тема',
       options: [
         {
           "label": "Конференция",
@@ -111,8 +73,8 @@ const dialogNew = {
           "value": "Железо"
         },
         {
-          "label": "Софт",
-          "value": "Софт"
+          "label": "Cофт",
+          "value": "Cофт"
         },
         {
           "label": "Книги",
@@ -120,6 +82,39 @@ const dialogNew = {
         },
       ],
     },
+
+    {
+      label: 'Какой отдел ?',
+      type: 'select',
+      name: 'Отдел',
+      options: [
+        {
+          "label": "Рекрутинг",
+          "value": "Рекрутинг"
+        },
+        {
+          "label": "Продажи",
+          "value": "Продажи"
+        },
+        {
+          "label": "Веб разработка",
+          "value": "Веб разработка"
+        },
+        {
+          "label": "Менеджмент",
+          "value": "Менеджмент"
+        },
+        {
+          "label": "Мобильная разработка",
+          "value": "Мобильная разработка"
+        },
+        {
+          "label": "Дизайн",
+          "value": "Дизайн"
+        },
+      ],
+    },
+
     {
       label: 'Название',
       type: 'text',
@@ -134,15 +129,16 @@ const dialogNew = {
     },
     {
       label: 'Обоснование',
-      type: 'text',
+      type: 'textarea',
       name: 'Обоснование',
+      optional: true,
       placeholder: 'Опишите причину',
     }
   ],
 };
-const dialog = {
+const dialogPersonal = {
   callback_id: 'kudos_submit',
-  title: 'Jira create task',
+  title: 'Новый сотрудник.',
   submit_label: 'Give',
   elements: [
     {
@@ -177,28 +173,60 @@ const dialog = {
       ],
     },
     {
-      label: 'Название',
+      label: 'Имя и фамилия ?',
       type: 'text',
-      name: 'Название',
-      placeholder: 'Название чего вы хотите',
+      name: 'Имя',
+      placeholder: 'Вася Пупкин',
     },
-    {
-      label: 'Ссылка',
-      type: 'text',
-      name: 'Ссылка',
-      placeholder: 'Напишите ссылку',
-    },
-    {
-      label: 'Обоснование',
-      type: 'text',
-      name: 'Обоснование',
-      placeholder: 'Опишите причину',
-    }
   ],
 };
+const dialogProject = {
+  callback_id: 'kudos_submit',
+  title: 'Новый проект.',
+  submit_label: 'Give',
+  elements: [
+    {
+      label: 'Имя проекта ?',
+      type: 'text',
+      name: 'Имя',
+      placeholder: 'Название проекта.',
+    },
+    {
+      label: 'Тип проекта ?',
+      type: 'text',
+      name: 'Тип',
+      placeholder: 'Напишите ссылку.',
+    },
+    {
+      label: 'Руководитель ?',
+      type: 'select',
+      name: 'Руководитель',
+      options: [
+        {
+          "label": "Igor Zorich",
+          "value": "Igor Zorich"
+        },
+        {
+          "label": "Anastasia Prokopenko",
+          "value": "Anastasia Prokopenko"
+        },
+        {
+          "label": "Anna Shiryaeva",
+          "value": "Anna Shiryaeva"
+        },
+        {
+          "label": "Alina Avdienko",
+          "value": "Alina Avdienko"
+        },
+      ],
+    },
+  ],
+};
+
 module.exports = {
   interactiveButtons,
   selectQuestions,
-  dialogNew,
-  dialog
+  dialogProject,
+  dialog,
+  dialogPersonal
 };
